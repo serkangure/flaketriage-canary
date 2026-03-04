@@ -1,0 +1,23 @@
+name: Canary Flake (FlakeTriage E2E Validation)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print run attempt
+        run: echo "Run attempt: ${{ github.run_attempt }}"
+
+      - name: Deterministic flake (fail on attempt 1, pass on attempt 2+)
+        run: |
+          if [ "${{ github.run_attempt }}" = "1" ]; then
+            echo "::error::Simulated flaky failure on first attempt"
+            exit 1
+          else
+            echo "Rerun attempt ${{ github.run_attempt }} — test passes!"
+            exit 0
+          fi

@@ -1,0 +1,20 @@
+# .github/flaketriage.yml — Canary repo config
+#
+# This is the configuration file used (or recommended) for the canary E2E test repo.
+# Place this at .github/flaketriage.yml in the canary repo.
+#
+# See docs/CONFIG.md for full schema reference.
+
+# FlakeTriage is enabled for this repo.
+enabled: true
+
+# Allow generous budget for testing.
+budget_daily: 10
+
+# Explicitly allow the canary workflow.
+# The canary workflow is named "Canary Flake (FlakeTriage E2E Validation)".
+allow_workflows:
+  - "Canary Flake"
+
+# No extra deny patterns needed for canary.
+deny_workflows: []
