@@ -10,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print run attempt
-        run: echo "Run attempt: ${{ github.run_attempt }}"
+        run: |
+          echo "Run attempt: ${{ github.run_attempt }}"
 
       - name: Deterministic flake (fail on attempt 1, pass on attempt 2+)
         run: |
@@ -18,6 +19,6 @@ jobs:
             echo "::error::Simulated flaky failure on first attempt"
             exit 1
           else
-            echo "Rerun attempt ${{ github.run_attempt }} — test passes!"
+            echo "Rerun attempt ${{ github.run_attempt }} - test passes!"
             exit 0
           fi
